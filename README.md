@@ -1,6 +1,6 @@
 # Skill Auditor — 技能审计工具
 
-审计已安装的 Claude Code 技能，检测重复、冲突、触发覆盖缺口和描述精度问题，并提供合并与改进能力。
+审计已安装的技能，检测重复、冲突、触发覆盖缺口和描述精度问题，并提供合并与改进能力。
 
 ## 概述
 
@@ -92,7 +92,7 @@ python ~/.claude/skills/skill-auditor/scripts/analyze.py
 
 ## 安装
 
-所有主流 AI 编码代理（Claude Code、Codex CLI、Gemini CLI、GitHub Copilot CLI、Cursor）均可使用。SKILL.md 启动时会**自动检测平台**并加载对应工具映射，无需手动配置。此技能无需额外依赖（分析脚本仅使用 Python 内置库）。
+所有主流 AI 编码代理（Claude Code、Codex CLI、Gemini CLI、GitHub Copilot CLI、Cursor）均可使用。SKILL.md 启动时会**自动检测平台**并加载对应工具映射，无需手动配置（默认平台是Claude code）。此技能无需额外依赖（分析脚本仅使用 Python 内置库）。
 
 ### Claude Code
 
