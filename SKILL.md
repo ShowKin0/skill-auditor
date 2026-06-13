@@ -20,7 +20,28 @@ description: >
 
 # Skill Auditor
 
-Audit installed skills for duplicates, conflicts, and gaps. Always ask before modifying files.
+> **跨平台兼容：** 本技能自动检测运行平台并加载对应工具映射。检测结果永久缓存，后续触发不再重复检测。
+
+## 平台检测（仅首次运行）
+
+首次触发时自动检测平台，结果写入 `{SKILL_DIR}/references/platform.json`，以后直接读取缓存：
+
+1. **检测平台** — 检查环境特征确定当前 AI 代理平台：
+   - 有 `~/.claude/` → **Claude Code**（原生，无需映射）
+   - 有 `~/.codex/config.toml` 或 `~/.codex/skills/` → **Codex CLI**
+   - 有 `~/.gemini/skills/` 或 `~/.agents/skills/` → **Gemini CLI**
+   - 有 `~/.config/github-copilot/` → **GitHub Copilot CLI**
+   - 有 `~/.cursor/` → **Cursor**
+   - 无法判断 → 询问用户
+
+2. **加载映射** — 非 Claude Code 平台自动加载 `references/` 下对应工具映射
+
+3. **缓存结果** — 写入 `platform.json`：
+   ```json
+   {"platform": "codex", "detected_at": "2026-06-13T14:30:00", "skill_dir": "~/.codex/skills/skill-auditor"}
+   ```
+
+后续每次触发直接读 `platform.json`，跳过检测步骤。
 
 ## Audit Workflow
 
@@ -39,8 +60,14 @@ Track progress with tasks when running an audit:
 
 Run the analysis script:
 ```bash
-python ~/.claude/skills/skill-auditor/scripts/analyze.py
+python {SKILL_DIR}/scripts/analyze.py
 ```
+
+> 其中 `{SKILL_DIR}` 是技能安装目录，根据检测到的平台确定：
+> - Claude Code: `~/.claude/skills/skill-auditor`
+> - Codex CLI: `~/.codex/skills/skill-auditor`
+> - Gemini CLI: `~/.gemini/skills/skill-auditor`
+> - 其他平台同理
 
 This produces a JSON report with:
 - **Skills table** — every installed skill with its description, length, concepts, Chinese analysis, and precision score
@@ -130,13 +157,13 @@ This produces a JSON report with:
 每次修改文件前，必须保存操作记录，便于日后回滚。
 
 **备份规则：**
-1. 备份目录：`~/.claude/skills/skill-auditor/references/backups/`
+1. 备份目录：`{SKILL_DIR}/references/backups/`
 2. 每次修改前，将被修改文件的原始内容复制到备份目录
 3. 备份文件名格式：`{技能名}_{YYYYMMDD_HHMMSS}_before_{操作类型}.md`
 4. 存在已有备份时不覆盖，追加新备份
 
 **操作日志：**
-每次执行修改后，追加一条记录到 `~/.claude/skills/skill-auditor/references/operation_log.json`：
+每次执行修改后，追加一条记录到 `{SKILL_DIR}/references/operation_log.json`：
 
 ```json
 {
