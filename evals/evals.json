@@ -1,0 +1,41 @@
+{
+  "skill_name": "skill-auditor",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "最近装了好多技能，感觉有些功能重复了，帮我审计一下 ~/.claude/skills/ 下面的技能，看看哪些可以合并。特别检查一下有没有重复的技能对",
+      "expected_output": "A complete audit report showing all skill duplicates, conflicts, trigger overlaps, Chinese support gaps, and precision concerns, with specific similarity scores and recommendations",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "我发现 grill-me 和 grill-with-docs 这两个技能功能太像了，帮我看看能不能合并。我想保留 grill-with-docs 的描述，但把 grill-me 的一些精华加进去",
+      "expected_output": "Analysis of the two skills (including similarity scores and trigger overlap), a merge proposal with before/after diff, and execution after user approval",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "我的技能在中文环境下触发不太好，帮我检查一下哪些技能缺少中文触发关键词，分别需要加什么",
+      "expected_output": "List of skills missing Chinese keywords, with suggested trigger phrases for each, and the option to preview and apply changes",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "帮我看一下 ~/.claude/skills/ 里所有技能的 trigger 覆盖情况。哪些技能的用户请求场景可能相互冲突，就是说用户说一句话可能同时触发两个技能的那种情况",
+      "expected_output": "Trigger overlap analysis showing which skill pairs would activate on the same user request, with trigger similarity scores and common domains/actions",
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "检查一下我所有技能的描述质量。哪些描述太啰嗦、缺少动作动词、没有具体输出描述、或者没有中文触发关键词？给出每个技能的精度评分和改进建议",
+      "expected_output": "Precision analysis for each skill with scores 0-1, specific issues flagged (verbose, no action verb, no triggers, no Chinese support, vague language), and actionable improvement suggestions",
+      "files": []
+    },
+    {
+      "id": 6,
+      "prompt": "我想确认一下 grill-me 和 grill-with-docs 到底是不是重复技能。如果确实重复了，帮我合并它们，把 grill-me 的独特内容融入 grill-with-docs",
+      "expected_output": "Detailed duplicate analysis with explanation of why they are or aren't duplicates (similarity score, common concepts, trigger overlap), followed by merge execution if confirmed",
+      "files": []
+    }
+  ]
+}
