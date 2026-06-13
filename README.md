@@ -94,16 +94,6 @@ python ~/.claude/skills/skill-auditor/scripts/analyze.py
 
 所有主流 AI 编码代理（Claude Code、Codex CLI、Gemini CLI）均使用相同的 `SKILL.md` 技能格式，**安装方式完全一致**。此技能无需额外依赖（分析脚本仅使用 Python 内置库）。
 
-### 一键安装
-
-```bash
-# 方式 A：git clone（推荐，可后续 git pull 更新）
-git clone https://github.com/ShowKin0/skill-auditor.git ~/.claude/skills/skill-auditor
-
-# 方式 B：curl（无需 git，适合新环境快速部署）
-curl -fsSL https://github.com/ShowKin0/skill-auditor/archive/refs/heads/main.tar.gz | tar -xz -C ~/.claude/skills && mv ~/.claude/skills/skill-auditor-main ~/.claude/skills/skill-auditor
-```
-
 ### Claude Code
 
 ```bash
